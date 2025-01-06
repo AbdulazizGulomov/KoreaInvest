@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ company.name }} Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ company.name }} ({{ company.ticker_symbol }})</h2>
+    <p><strong>Sector:</strong> {{ company.sector }}</p>
+    <p><strong>IPO Year:</strong> {{ company.ipo_year }}</p>
+    <p><strong>Website:</strong> <a href="{{ company.website }}" target="_blank">{{ company.website }}</a></p>
+
+    <h3>Financial Data</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Revenue (USD)</th>
+                <th>Net Income (USD)</th>
+                <th>Total Assets (USD)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in financials %}
+            <tr>
+                <td>{{ data.fiscal_year }}</td>
+                <td>{{ data.revenue|floatformat:2 }}</td>
+                <td>{{ data.net_income|floatformat:2 }}</td>
+                <td>{{ data.total_assets|floatformat:2 }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No financial data available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

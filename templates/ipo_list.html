@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>IPO Tracker</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Ticker Symbol</th>
+                <th>IPO Date</th>
+                <th>Sector</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ipo in ipos %}
+            <tr>
+                <td>{{ ipo.company.name }}</td>
+                <td>{{ ipo.ticker_symbol }}</td>
+                <td>{{ ipo.ipo_date }}</td>
+                <td>{{ ipo.company.sector }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No upcoming IPOs found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
